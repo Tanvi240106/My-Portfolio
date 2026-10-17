@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tanvi Aggarwal | Portfolio</title>
+        <title>Tanvi Aggarwal | Interactive Portfolio</title>
         <!-- Tailwind CSS CDN -->
         <script src="https://cdn.tailwindcss.com"></script>
         <!-- Lucide Icons -->
@@ -29,16 +29,9 @@
                         colors: {
                             brand: {
                                 50: '#f0fdfa',
-                                100: '#ccfbf1',
                                 400: '#2dd4bf',
                                 500: '#14b8a6',
                                 600: '#0d9488',
-                                700: '#0f766e',
-                                900: '#134e4a',
-                            },
-                            accent: {
-                                500: '#8b5cf6',
-                                600: '#7c3aed',
                             }
                         }
                     }
@@ -62,63 +55,90 @@
             }
 
             .glass-card {
-                background: rgba(255, 255, 255, 0.7);
-                backdrop-filter: blur(12px);
+                background: rgba(255, 255, 255, 0.75);
+                backdrop-filter: blur(16px);
                 border: 1px solid rgba(229, 231, 235, 0.8);
             }
 
             .dark .glass-card {
-                background: rgba(17, 24, 39, 0.7);
-                border: 1px solid rgba(55, 65, 81, 0.5);
+                background: rgba(15, 23, 42, 0.75);
+                border: 1px solid rgba(51, 65, 85, 0.6);
             }
 
             .arcade-card {
-                background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+                background: linear-gradient(135deg, #1e1b4b 0%, #311042 50%, #4c1d95 100%);
                 border: 3px solid #f59e0b;
-                box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+                box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
             }
 
             .arcade-glow {
-                text-shadow: 0 0 10px #f59e0b, 0 0 20px #ef4444;
+                text-shadow: 0 0 12px #f59e0b, 0 0 25px #ec4899;
+            }
+
+            .gradient-border {
+                position: relative;
+                border-radius: 1rem;
+            }
+
+            .gradient-border::before {
+                content: '';
+                position: absolute;
+                inset: -2px;
+                border-radius: 1.1rem;
+                background: linear-gradient(45deg, #14b8a6, #6366f1, #ec4899, #f59e0b);
+                z-index: -1;
+                opacity: 0.7;
+                transition: opacity 0.3s ease;
+            }
+
+            .gradient-border:hover::before {
+                opacity: 1;
             }
         </style>
     </head>
 
     <body
-        class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
+        class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative overflow-x-hidden selection:bg-teal-500 selection:text-white">
+        <!-- Particle Background Canvas -->
         <canvas id="bg-canvas"></canvas>
 
         <div class="relative z-10 flex flex-col min-h-screen">
-            <!-- Navbar -->
+            <!-- Header Navigation -->
             <header
-                class="sticky top-0 z-40 backdrop-blur-md bg-white/75 dark:bg-slate-900/75 border-b border-slate-200 dark:border-slate-800">
+                class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <a href="#hero"
-                        class="text-xl font-bold tracking-wider bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text text-transparent">
+                        class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-teal-400 via-indigo-500 to-pink-500 bg-clip-text text-transparent hover:scale-105 transition transform">
                         TANVI AGGARWAL
                     </a>
-                    <nav class="hidden md:flex space-x-6 text-sm font-medium">
-                        <a href="#about" class="hover:text-teal-500 transition">About</a>
-                        <a href="#rhythmik" class="hover:text-amber-500 transition font-semibold text-amber-500">🏆
+                    <nav class="hidden md:flex space-x-6 text-sm font-semibold">
+                        <a href="#about" class="hover:text-teal-400 transition">About</a>
+                        <a href="#rhythmik"
+                            class="hover:text-amber-400 transition font-bold text-amber-500 flex items-center gap-1">🏆
                             Rhythmik</a>
-                        <a href="#experience" class="hover:text-teal-500 transition">Experience</a>
-                        <a href="#projects" class="hover:text-teal-500 transition">Projects</a>
-                        <a href="#skills" class="hover:text-teal-500 transition">Skills</a>
-                        <a href="#education" class="hover:text-teal-500 transition">Education</a>
-                        <a href="#contact" class="hover:text-teal-500 transition">Contact</a>
+                        <a href="#experience" class="hover:text-indigo-400 transition">Experience</a>
+                        <a href="#projects" class="hover:text-pink-400 transition">Projects</a>
+                        <a href="#skills" class="hover:text-teal-400 transition">Skills</a>
+                        <a href="#education" class="hover:text-purple-400 transition">Education</a>
+                        <a href="#contact" class="hover:text-teal-400 transition">Contact</a>
                     </nav>
                     <div class="flex items-center space-x-3">
+                        <!-- Resume PDF Link -->
+                        <a href="./resume.pdf" target="_blank" download="TANVI_AGGARWAL_RESUME.pdf"
+                            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white shadow-md shadow-teal-500/20 transition transform hover:-translate-y-0.5">
+                            <i class="fas fa-file-pdf text-sm"></i> Resume PDF
+                        </a>
                         <button id="theme-toggle"
-                            class="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:scale-105 transition"
-                            title="Toggle Dark Mode">
-                            <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+                            class="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:scale-110 transition"
+                            title="Toggle Light/Dark Theme">
+                            <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
                         </button>
-                        <a href="https://github.com/Tanvi240106" target="_blank"
-                            class="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 hover:text-teal-500 transition">
+                        <a href="https://github.com/Tanvi240106/" target="_blank"
+                            class="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 hover:text-teal-400 transition">
                             <i class="fab fa-github text-xl"></i>
                         </a>
                         <a href="https://www.linkedin.com/in/tanvi-aggarwal-8934242a0" target="_blank"
-                            class="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 hover:text-teal-500 transition">
+                            class="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 hover:text-indigo-400 transition">
                             <i class="fab fa-linkedin text-xl"></i>
                         </a>
                     </div>
@@ -126,64 +146,70 @@
             </header>
 
             <!-- Main Content -->
-            <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+            <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20">
 
                 <!-- Hero Section -->
                 <section id="hero"
-                    class="pt-8 pb-12 md:py-20 flex flex-col md:flex-row items-center justify-between gap-10">
+                    class="pt-6 pb-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-10">
                     <div class="space-y-6 flex-1 text-center md:text-left">
                         <div
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 border border-teal-300 dark:border-teal-700">
-                            <span class="w-2 h-2 rounded-full bg-teal-500 animate-ping"></span>
+                            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-teal-500/20 via-indigo-500/20 to-pink-500/20 text-teal-600 dark:text-teal-300 border border-teal-500/30">
+                            <span class="w-2.5 h-2.5 rounded-full bg-teal-400 animate-ping"></span>
                             MCA Student @ Christ University
                         </div>
                         <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight">
                             Hi, I'm <span
-                                class="bg-gradient-to-r from-teal-500 via-indigo-500 to-purple-600 bg-clip-text text-transparent">Tanvi
+                                class="bg-gradient-to-r from-teal-400 via-indigo-500 to-pink-500 bg-clip-text text-transparent">Tanvi
                                 Aggarwal</span>
                         </h1>
                         <p class="text-xl text-slate-600 dark:text-slate-300 font-mono h-12">
                             I am a <span id="typewriter"
                                 class="text-teal-500 dark:text-teal-400 font-bold border-r-2 border-teal-500 pr-1"></span>
                         </p>
-                        <p class="text-slate-600 dark:text-slate-400 max-w-xl text-base leading-relaxed">
-                            Passionate about Artificial Intelligence, emerging technologies, and full-stack software
-                            development. Holds a BCA from GGSIPU (8.09 CGPA) with hands-on experience in Web Development
-                            and Data Analytics.
+                        <p class="text-slate-600 dark:text-slate-300 max-w-xl text-base leading-relaxed">
+                            MCA student at Christ University with a strong interest in Artificial Intelligence, emerging
+                            technologies, and software development. BCA graduate from GGSIPU with an 8.09 CGPA.
                         </p>
                         <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
-                            <a href="#projects"
-                                class="px-6 py-3 rounded-lg font-semibold bg-teal-500 hover:bg-teal-600 text-white shadow-lg shadow-teal-500/30 transition transform hover:-translate-y-0.5">
-                                Explore Projects
+                            <a href="./resume.pdf" target="_blank" download="TANVI_AGGARWAL_RESUME.pdf"
+                                class="px-6 py-3 rounded-xl font-bold bg-gradient-to-r from-teal-500 via-emerald-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white shadow-xl shadow-teal-500/25 transition transform hover:-translate-y-1 flex items-center gap-2">
+                                <i class="fas fa-file-download text-lg"></i> Download Resume
                             </a>
-                            <a href="mailto:aggarwaltanvi93@gmail.com"
-                                class="px-6 py-3 rounded-lg font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition">
-                                Contact Me
+                            <a href="#projects"
+                                class="px-6 py-3 rounded-xl font-bold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition transform hover:-translate-y-1">
+                                Explore Projects
                             </a>
                         </div>
                     </div>
+
+                    <!-- Avatar & Glowing Badge -->
                     <div class="relative flex justify-center items-center">
                         <div
-                            class="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-tr from-teal-400 to-indigo-600 p-1 shadow-2xl">
+                            class="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-tr from-teal-400 via-indigo-500 to-pink-500 p-1.5 shadow-2xl shadow-indigo-500/30">
                             <div
                                 class="w-full h-full rounded-full bg-slate-900 flex flex-col items-center justify-center p-6 text-center text-white relative overflow-hidden">
-                                <i class="fas fa-code text-6xl text-teal-400 mb-3 animate-bounce"></i>
-                                <h3 class="text-xl font-bold">Tanvi Aggarwal</h3>
-                                <p class="text-xs text-slate-400 mt-1">Delhi, India</p>
-                                <div class="mt-4 flex gap-2">
+                                <i class="fas fa-laptop-code text-6xl text-teal-400 mb-3 animate-pulse"></i>
+                                <h3
+                                    class="text-2xl font-black bg-gradient-to-r from-teal-300 to-indigo-300 bg-clip-text text-transparent">
+                                    Tanvi Aggarwal</h3>
+                                <p class="text-xs text-slate-400 mt-1 font-mono">Delhi, India</p>
+                                <div class="mt-4 flex flex-wrap gap-1.5 justify-center">
                                     <span
-                                        class="px-2 py-1 text-[10px] bg-teal-500/20 text-teal-300 rounded-full border border-teal-500/30">AI
+                                        class="px-2.5 py-1 text-[10px] font-bold bg-teal-500/20 text-teal-300 rounded-full border border-teal-500/30">AI
                                         Enthusiast</span>
                                     <span
-                                        class="px-2 py-1 text-[10px] bg-indigo-500/20 text-indigo-300 rounded-full border border-indigo-500/30">Web
+                                        class="px-2.5 py-1 text-[10px] font-bold bg-indigo-500/20 text-indigo-300 rounded-full border border-indigo-500/30">Web
                                         Dev</span>
+                                    <span
+                                        class="px-2.5 py-1 text-[10px] font-bold bg-pink-500/20 text-pink-300 rounded-full border border-pink-500/30">Data
+                                        Analyst</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Rhythmik Arcade Trophy Section -->
+                <!-- Rhythmik Arcade Showcase Section -->
                 <section id="rhythmik" class="arcade-card rounded-2xl p-6 md:p-8 text-white relative overflow-hidden">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                         <div class="space-y-4 text-center md:text-left">
@@ -192,28 +218,30 @@
                                 <i class="fas fa-trophy text-amber-400"></i> 1ST POSITION — UNIVERSITY SCIENCE
                                 EXHIBITION
                             </div>
-                            <h2 class="text-3xl md:text-4xl font-pixel text-amber-400 arcade-glow">RHYTHMIK</h2>
+                            <h2 class="text-3xl md:text-5xl font-pixel text-amber-400 arcade-glow tracking-wider">
+                                RHYTHMIK</h2>
                             <p class="text-slate-200 font-mono text-sm max-w-xl">
-                                An 8-bit typing arcade game built during MCA studies. Combines fast-paced mechanics with
-                                interactive rhythmic typing challenges!
+                                An 8-bit typing arcade game built during MCA studies at Christ University. Combines
+                                fast-paced mechanics with interactive rhythmic typing challenges!
                             </p>
                             <div class="flex flex-wrap gap-2 justify-center md:justify-start">
                                 <span
-                                    class="px-3 py-1 text-xs rounded bg-slate-800/80 text-amber-300 border border-amber-500/30">8-Bit
+                                    class="px-3 py-1 text-xs rounded-md bg-slate-800/80 text-amber-300 border border-amber-500/30 font-mono">8-Bit
                                     Arcade</span>
                                 <span
-                                    class="px-3 py-1 text-xs rounded bg-slate-800/80 text-amber-300 border border-amber-500/30">Typing
+                                    class="px-3 py-1 text-xs rounded-md bg-slate-800/80 text-amber-300 border border-amber-500/30 font-mono">Typing
                                     Game</span>
                                 <span
-                                    class="px-3 py-1 text-xs rounded bg-slate-800/80 text-amber-300 border border-amber-500/30">Award
+                                    class="px-3 py-1 text-xs rounded-md bg-slate-800/80 text-amber-300 border border-amber-500/30 font-mono">Award
                                     Winner</span>
                             </div>
                         </div>
                         <div
-                            class="flex flex-col items-center justify-center p-6 bg-slate-900/80 rounded-xl border border-amber-500/40 text-center min-w-[200px]">
-                            <i class="fas fa-gamepad text-5xl text-amber-400 mb-2 animate-pulse"></i>
-                            <span class="font-pixel text-xs text-amber-300">PLAYED & AWARDED</span>
-                            <span class="text-xs text-slate-400 mt-1">Available on GitHub & LinkedIn</span>
+                            class="flex flex-col items-center justify-center p-6 bg-slate-900/90 rounded-2xl border border-amber-500/40 text-center min-w-[220px]">
+                            <i class="fas fa-gamepad text-6xl text-amber-400 mb-3 animate-bounce"></i>
+                            <span class="font-pixel text-xs text-amber-300">AWARD WINNER</span>
+                            <a href="https://github.com/Tanvi240106/" target="_blank"
+                                class="text-xs text-teal-400 hover:underline mt-2">View on GitHub →</a>
                         </div>
                     </div>
                 </section>
@@ -221,160 +249,159 @@
                 <!-- Experience Section -->
                 <section id="experience" class="space-y-6">
                     <div class="text-center md:text-left">
-                        <h2 class="text-3xl font-bold">Professional Experience</h2>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm">Internships & industry work</p>
+                        <h2
+                            class="text-3xl font-extrabold bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
+                            Professional Experience</h2>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm">Industry internships & technical projects
+                        </p>
                     </div>
                     <div class="grid gap-6 md:grid-cols-2">
                         <!-- CodSoft -->
-                        <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-500 transition">
+                        <div
+                            class="glass-card p-6 rounded-2xl space-y-4 hover:border-teal-400 transition transform hover:-translate-y-1">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="text-xl font-bold text-teal-600 dark:text-teal-400">CodSoft</h3>
+                                    <h3 class="text-xl font-bold text-teal-500">CodSoft</h3>
                                     <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Web Developer
                                         Intern</p>
                                 </div>
                                 <span
-                                    class="text-xs px-2.5 py-1 rounded-full bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 font-mono">Aug
-                                    2024 - Sep 2024</span>
+                                    class="text-xs px-2.5 py-1 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 font-mono font-bold">Aug
+                                    25, 2024 - Sep 25, 2024</span>
                             </div>
                             <ul class="text-sm space-y-2 text-slate-600 dark:text-slate-300 list-disc list-inside">
-                                <li><strong>Portfolio Website:</strong> Designed and developed a sleek, responsive
-                                    portfolio using HTML5 and CSS3 to highlight projects and achievements.</li>
-                                <li><strong>Restaurant Landing Page:</strong> Built a vibrant landing page highlighting
-                                    Indian cultural heritage and cuisine using modern web styling.</li>
-                                <li><strong>Interactive Calculator:</strong> Programmed a functional arithmetic
-                                    calculator with JavaScript and styled responsive UI elements.</li>
+                                <li><strong>Portfolio:</strong> Built a sleek and responsive portfolio website using
+                                    HTML and CSS.</li>
+                                <li><strong>Landing Page:</strong> Built a landing page website for an Indian cuisine
+                                    restaurant highlighting cultural heritage.</li>
+                                <li><strong>Calculator:</strong> Developed an interactive calculator using HTML, CSS,
+                                    and JavaScript.</li>
                             </ul>
                         </div>
                         <!-- Skilled Up -->
-                        <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-indigo-500 transition">
+                        <div
+                            class="glass-card p-6 rounded-2xl space-y-4 hover:border-indigo-400 transition transform hover:-translate-y-1">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">Skilled Up</h3>
+                                    <h3 class="text-xl font-bold text-indigo-500">Skilled Up</h3>
                                     <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Data Analyst
                                         Intern</p>
                                 </div>
                                 <span
-                                    class="text-xs px-2.5 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 font-mono">Jun
-                                    2025 - Aug 2025</span>
+                                    class="text-xs px-2.5 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-mono font-bold">Jun
+                                    15, 2025 - Aug 15, 2025</span>
                             </div>
                             <ul class="text-sm space-y-2 text-slate-600 dark:text-slate-300 list-disc list-inside">
-                                <li><strong>Telecom Analytics:</strong> Conducted Exploratory Data Analysis (EDA) and
-                                    built Power BI dashboards for telecom sector insights.</li>
-                                <li><strong>Sales Analytics System:</strong> Designed relational database architecture
-                                    for Salase Industries and Flipkart sales analysis.</li>
-                                <li><strong>Healthcare Outcomes:</strong> Analyzed patient treatment outcomes and
-                                    performance metrics for hospital care optimization.</li>
+                                <li><strong>Telecom Industry Analysis:</strong> Exploratory Data Analysis (EDA) and
+                                    Power BI Dashboard Development.</li>
+                                <li><strong>E-Commerce System Design:</strong> Relational Database Development for
+                                    Salase Industries & Flipkart Sales Analysis.</li>
+                                <li><strong>Healthcare Outcomes:</strong> Patient Treatment Outcome Analysis & Hospital
+                                    Patient Care Performance.</li>
                             </ul>
                         </div>
                     </div>
                 </section>
 
-                <!-- Projects Section -->
+                <!-- Projects Showcase -->
                 <section id="projects" class="space-y-6">
                     <div class="text-center md:text-left">
-                        <h2 class="text-3xl font-bold">Featured Projects</h2>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm">Web Apps, Data Analytics & Arcade Games
-                        </p>
+                        <h2
+                            class="text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+                            Featured Projects</h2>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm">Arcade games, web applications & data
+                            analytics</p>
                     </div>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div
-                            class="glass-card p-5 rounded-xl space-y-3 flex flex-col justify-between hover:scale-[1.02] transition">
+                        <div class="gradient-border glass-card p-6 rounded-2xl space-y-3 flex flex-col justify-between">
                             <div>
-                                <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Arcade /
+                                <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Arcade /
                                     MCA</span>
-                                <h3 class="text-lg font-bold mt-1">Rhythmik</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">8-bit typing arcade game that
-                                    won 1st position at the University Science Exhibition.</p>
+                                <h3 class="text-xl font-bold mt-1">Rhythmik Game</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 mt-2">8-bit typing arcade game that
+                                    secured 1st position at the University Science Exhibition.</p>
                             </div>
                             <div class="flex gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">JavaScript</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-amber-500/20 text-amber-300 font-mono">JavaScript</span>
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">Game
-                                    Dev</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-amber-500/20 text-amber-300 font-mono">8-Bit
+                                    Arcade</span>
                             </div>
                         </div>
-                        <div
-                            class="glass-card p-5 rounded-xl space-y-3 flex flex-col justify-between hover:scale-[1.02] transition">
+                        <div class="gradient-border glass-card p-6 rounded-2xl space-y-3 flex flex-col justify-between">
                             <div>
-                                <span class="text-xs font-bold text-teal-500 uppercase tracking-wider">Data
+                                <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">Data
                                     Analytics</span>
-                                <h3 class="text-lg font-bold mt-1">Telecom Industry Analysis</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Power BI Dashboard &
-                                    Exploratory Data Analysis (EDA) on customer retention & network usage.</p>
+                                <h3 class="text-xl font-bold mt-1">Telecom Industry Analysis</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 mt-2">Power BI Dashboard &
+                                    Exploratory Data Analysis (EDA) on customer retention.</p>
                             </div>
                             <div class="flex gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
-                                <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">Power
+                                <span class="text-[10px] px-2 py-1 rounded bg-teal-500/20 text-teal-300 font-mono">Power
                                     BI</span>
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">EDA</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-teal-500/20 text-teal-300 font-mono">EDA</span>
                             </div>
                         </div>
-                        <div
-                            class="glass-card p-5 rounded-xl space-y-3 flex flex-col justify-between hover:scale-[1.02] transition">
+                        <div class="gradient-border glass-card p-6 rounded-2xl space-y-3 flex flex-col justify-between">
                             <div>
-                                <span class="text-xs font-bold text-indigo-500 uppercase tracking-wider">E-Commerce
+                                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">E-Commerce
                                     Data</span>
-                                <h3 class="text-lg font-bold mt-1">Flipkart Sales Analysis</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Relational database design
-                                    and sales system analytics for Salase Industries & Flipkart data.</p>
+                                <h3 class="text-xl font-bold mt-1">Flipkart Sales Analysis</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 mt-2">Relational database design
+                                    and sales system analytics for Salase Industries & Flipkart.</p>
                             </div>
                             <div class="flex gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">MySQL</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-indigo-500/20 text-indigo-300 font-mono">MySQL</span>
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">Database
+                                    class="text-[10px] px-2 py-1 rounded bg-indigo-500/20 text-indigo-300 font-mono">System
                                     Design</span>
                             </div>
                         </div>
-                        <div
-                            class="glass-card p-5 rounded-xl space-y-3 flex flex-col justify-between hover:scale-[1.02] transition">
+                        <div class="gradient-border glass-card p-6 rounded-2xl space-y-3 flex flex-col justify-between">
                             <div>
                                 <span
-                                    class="text-xs font-bold text-purple-500 uppercase tracking-wider">Healthcare</span>
-                                <h3 class="text-lg font-bold mt-1">Patient Treatment Outcome Analysis</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Hospital patient care
-                                    performance analysis evaluating treatment success rates and operational metrics.</p>
+                                    class="text-xs font-bold text-purple-400 uppercase tracking-wider">Healthcare</span>
+                                <h3 class="text-xl font-bold mt-1">Patient Treatment Outcome</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 mt-2">Hospital patient care
+                                    performance analysis evaluating treatment success rates.</p>
                             </div>
                             <div class="flex gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">Data
-                                    Analytics</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-purple-500/20 text-purple-300 font-mono">Python</span>
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">Python</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-purple-500/20 text-purple-300 font-mono">Analytics</span>
                             </div>
                         </div>
-                        <div
-                            class="glass-card p-5 rounded-xl space-y-3 flex flex-col justify-between hover:scale-[1.02] transition">
+                        <div class="gradient-border glass-card p-6 rounded-2xl space-y-3 flex flex-col justify-between">
                             <div>
-                                <span class="text-xs font-bold text-teal-500 uppercase tracking-wider">Web
+                                <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">Web
                                     Development</span>
-                                <h3 class="text-lg font-bold mt-1">Indian Cuisine Landing Page</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Vibrant web landing page
-                                    featuring rich cultural heritage aesthetic and restaurant menu showcases.</p>
+                                <h3 class="text-xl font-bold mt-1">Indian Cuisine Landing Page</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 mt-2">Vibrant web landing page
+                                    featuring rich cultural heritage aesthetic.</p>
                             </div>
                             <div class="flex gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">HTML5</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-teal-500/20 text-teal-300 font-mono">HTML5</span>
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">CSS3</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-teal-500/20 text-teal-300 font-mono">CSS3</span>
                             </div>
                         </div>
-                        <div
-                            class="glass-card p-5 rounded-xl space-y-3 flex flex-col justify-between hover:scale-[1.02] transition">
+                        <div class="gradient-border glass-card p-6 rounded-2xl space-y-3 flex flex-col justify-between">
                             <div>
-                                <span class="text-xs font-bold text-teal-500 uppercase tracking-wider">Web App</span>
-                                <h3 class="text-lg font-bold mt-1">Interactive Web Calculator</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Interactive web calculator
-                                    supporting full arithmetic operations with responsive UI feedback.</p>
+                                <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">Web App</span>
+                                <h3 class="text-xl font-bold mt-1">Interactive Web Calculator</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 mt-2">Interactive web calculator
+                                    supporting full arithmetic operations.</p>
                             </div>
                             <div class="flex gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">JavaScript</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-pink-500/20 text-pink-300 font-mono">JavaScript</span>
                                 <span
-                                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono">CSS3</span>
+                                    class="text-[10px] px-2 py-1 rounded bg-pink-500/20 text-pink-300 font-mono">CSS3</span>
                             </div>
                         </div>
                     </div>
@@ -383,143 +410,158 @@
                 <!-- Skills Section -->
                 <section id="skills" class="space-y-6">
                     <div class="text-center md:text-left">
-                        <h2 class="text-3xl font-bold">Skills & Technologies</h2>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm">Technical proficiencies and tools</p>
+                        <h2
+                            class="text-3xl font-extrabold bg-gradient-to-r from-teal-400 via-indigo-400 to-pink-400 bg-clip-text text-transparent">
+                            Skills & Technologies</h2>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm">Technical capabilities and toolset</p>
                     </div>
                     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        <div class="glass-card p-5 rounded-xl">
-                            <h3 class="font-bold text-teal-500 text-sm mb-3">Programming & AI</h3>
+                        <div class="glass-card p-5 rounded-2xl border-t-4 border-teal-400">
+                            <h3 class="font-bold text-teal-400 text-sm mb-3">Programming & AI</h3>
                             <div class="flex flex-wrap gap-2 text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">Python</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">C Programming</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">Fundamentals of
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">Python</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">C Programming</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">Fundamentals of
                                     AI</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">JavaScript</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">Javascript</span>
                             </div>
                         </div>
-                        <div class="glass-card p-5 rounded-xl">
-                            <h3 class="font-bold text-indigo-500 text-sm mb-3">Web & Databases</h3>
+                        <div class="glass-card p-5 rounded-2xl border-t-4 border-indigo-400">
+                            <h3 class="font-bold text-indigo-400 text-sm mb-3">Web & Databases</h3>
                             <div class="flex flex-wrap gap-2 text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">HTML5 / CSS3</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">MySQL</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">MongoDB</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">DBMS</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">HTML5 / CSS3</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">MySQL</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">MONGO DB</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">DBMS</span>
                             </div>
                         </div>
-                        <div class="glass-card p-5 rounded-xl">
-                            <h3 class="font-bold text-purple-500 text-sm mb-3">Developer Tools</h3>
+                        <div class="glass-card p-5 rounded-2xl border-t-4 border-pink-400">
+                            <h3 class="font-bold text-pink-400 text-sm mb-3">Developer Tools</h3>
                             <div class="flex flex-wrap gap-2 text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">VS Code</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">GitHub / Git</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">Power BI</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">MS Office</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">VS code</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">Github</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">Power BI</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">MS office</span>
                             </div>
                         </div>
-                        <div class="glass-card p-5 rounded-xl">
-                            <h3 class="font-bold text-amber-500 text-sm mb-3">Professional Skills</h3>
+                        <div class="glass-card p-5 rounded-2xl border-t-4 border-amber-400">
+                            <h3 class="font-bold text-amber-400 text-sm mb-3">Soft Skills</h3>
                             <div class="flex flex-wrap gap-2 text-xs">
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">Task
-                                    Prioritization</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">Communication</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">Analytical
-                                    Thinking</span>
-                                <span class="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-800">Adaptability</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">Task
+                                    prioritization</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">Communication</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800">Understanding
+                                    Websites</span>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Education & Certifications Section -->
+                <!-- Education & Certifications -->
                 <section id="education" class="grid lg:grid-cols-2 gap-8">
-                    <!-- Education -->
                     <div class="space-y-4">
-                        <h2 class="text-3xl font-bold">Education</h2>
+                        <h2 class="text-3xl font-extrabold text-teal-400">Education</h2>
                         <div class="space-y-4">
-                            <div class="glass-card p-5 rounded-xl space-y-1 border-l-4 border-teal-500">
+                            <div class="glass-card p-5 rounded-2xl border-l-4 border-teal-400">
                                 <div class="flex justify-between items-start">
-                                    <h3 class="font-bold">Christ University</h3>
-                                    <span class="text-xs font-mono text-teal-500">Sep 2023 - Jun 2026</span>
+                                    <h3 class="font-bold text-lg">Christ University</h3>
+                                    <span class="text-xs font-mono font-bold text-teal-400">Sep 2023 - Jun 2026</span>
                                 </div>
                                 <p class="text-sm text-slate-600 dark:text-slate-300">Master of Computer Applications
                                     (MCA)</p>
                             </div>
-                            <div class="glass-card p-5 rounded-xl space-y-1 border-l-4 border-indigo-500">
+                            <div class="glass-card p-5 rounded-2xl border-l-4 border-indigo-400">
                                 <div class="flex justify-between items-start">
-                                    <h3 class="font-bold">Tecnia Institute of Advanced Studies (GGSIPU)</h3>
-                                    <span class="text-xs font-mono text-indigo-500">Mar 2020 - Mar 2023</span>
+                                    <h3 class="font-bold text-lg">Tecnia Institute of Advanced Studies (GGSIPU)</h3>
+                                    <span class="text-xs font-mono font-bold text-indigo-400">Mar 2020 - Mar 2023</span>
                                 </div>
                                 <p class="text-sm text-slate-600 dark:text-slate-300">Bachelor of Computer Applications
                                     (BCA)</p>
-                                <p class="text-xs font-semibold text-teal-600 dark:text-teal-400 mt-1">Cumulative CGPA:
-                                    8.09 / 10.0</p>
+                                <p class="text-xs font-bold text-teal-400 mt-1">Cumulative CGPA: 8.09 / 10.0</p>
                             </div>
-                            <div class="glass-card p-5 rounded-xl space-y-1 border-l-4 border-slate-400">
+                            <div class="glass-card p-5 rounded-2xl border-l-4 border-slate-400">
                                 <div class="flex justify-between items-start">
-                                    <h3 class="font-bold">Prince Public School</h3>
+                                    <h3 class="font-bold text-lg">Prince Public School</h3>
                                     <span class="text-xs font-mono text-slate-400">2020 - 2023</span>
                                 </div>
                                 <p class="text-sm text-slate-600 dark:text-slate-300">High School Diploma</p>
-                                <p class="text-xs text-slate-500">Class XII: 88.9% | Class X: 80%</p>
+                                <p class="text-xs text-slate-400">Class XII: 88.9% | Class X: 80%</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Certifications -->
                     <div class="space-y-4">
-                        <h2 class="text-3xl font-bold">Certifications & Languages</h2>
+                        <h2 class="text-3xl font-extrabold text-indigo-400">Certifications & Languages</h2>
                         <div class="space-y-3">
                             <div class="glass-card p-4 rounded-xl flex justify-between items-center">
                                 <div>
                                     <h4 class="font-bold text-sm">SWAYAM NPTEL Certificate</h4>
-                                    <p class="text-xs text-slate-500">Database Management System (DBMS)</p>
+                                    <p class="text-xs text-slate-400">Database Management System (DBMS)</p>
                                 </div>
-                                <span class="text-xs font-mono text-slate-400">Oct 2023</span>
+                                <span class="text-xs font-mono text-slate-400">October 2023</span>
                             </div>
                             <div class="glass-card p-4 rounded-xl flex justify-between items-center">
                                 <div>
-                                    <h4 class="font-bold text-sm">Great Learning</h4>
-                                    <p class="text-xs text-slate-500">Introduction to AI</p>
+                                    <h4 class="font-bold text-sm">Great Learning Course</h4>
+                                    <p class="text-xs text-slate-400">Introduction to AI</p>
                                 </div>
-                                <span class="text-xs font-mono text-slate-400">Aug 2024</span>
+                                <span class="text-xs font-mono text-slate-400">August 2024</span>
                             </div>
                             <div class="glass-card p-4 rounded-xl flex justify-between items-center">
                                 <div>
-                                    <h4 class="font-bold text-sm">Great Learning</h4>
-                                    <p class="text-xs text-slate-500">Programming Basics</p>
+                                    <h4 class="font-bold text-sm">Great Learning Course</h4>
+                                    <p class="text-xs text-slate-400">Programming Basics</p>
                                 </div>
-                                <span class="text-xs font-mono text-slate-400">Aug 2024</span>
+                                <span class="text-xs font-mono text-slate-400">August 2024</span>
                             </div>
                             <div class="glass-card p-4 rounded-xl">
                                 <h4 class="font-bold text-sm mb-1">Languages Spoken</h4>
-                                <p class="text-xs text-slate-600 dark:text-slate-300">English, Hindi</p>
+                                <p class="text-xs text-slate-300">English, Hindi</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <!-- Contact Section -->
-                <section id="contact" class="glass-card p-8 rounded-2xl text-center space-y-4">
-                    <h2 class="text-3xl font-bold">Get In Touch</h2>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm max-w-md mx-auto">
-                        Feel free to reach out for software engineering roles, data analytics positions, or technical
-                        collaboration!
+                <section id="contact"
+                    class="glass-card p-8 rounded-3xl text-center space-y-6 border-2 border-teal-500/30">
+                    <h2
+                        class="text-3xl font-extrabold bg-gradient-to-r from-teal-400 via-indigo-400 to-pink-500 bg-clip-text text-transparent">
+                        Get In Touch</h2>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm max-w-md mx-auto">
+                        Feel free to reach out
                     </p>
                     <div class="flex flex-wrap justify-center gap-6 pt-2 text-sm font-semibold">
                         <a href="mailto:aggarwaltanvi93@gmail.com"
-                            class="flex items-center gap-2 text-teal-600 dark:text-teal-400 hover:underline">
-                            <i class="fas fa-envelope"></i> aggarwaltanvi93@gmail.com
+                            class="flex items-center gap-2 text-teal-400 hover:underline">
+                            <i class="fas fa-envelope text-lg"></i> aggarwaltanvi93@gmail.com
                         </a>
-                        <a href="tel:7011286687"
-                            class="flex items-center gap-2 text-teal-600 dark:text-teal-400 hover:underline">
-                            <i class="fas fa-phone"></i> +91 7011286687
+                    </div>
+                    <div
+                        class="flex flex-wrap justify-center gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+                        <a href="https://www.linkedin.com/in/tanvi-aggarwal-8934242a0" target="_blank"
+                            class="px-4 py-2 rounded-xl bg-indigo-600/20 text-indigo-400 hover:bg-indigo-600/30 border border-indigo-500/40 text-xs font-bold flex items-center gap-2 transition">
+                            <i class="fab fa-linkedin text-base"></i> LinkedIn Profile
+                        </a>
+                        <a href="https://github.com/Tanvi240106/" target="_blank"
+                            class="px-4 py-2 rounded-xl bg-teal-600/20 text-teal-400 hover:bg-teal-600/30 border border-teal-500/40 text-xs font-bold flex items-center gap-2 transition">
+                            <i class="fab fa-github text-base"></i> GitHub Repository
                         </a>
                     </div>
                 </section>
 
             </main>
 
+            <!-- Floating Mobile Resume Action Button -->
+            <div class="fixed bottom-6 right-6 z-50">
+                <a href="./resume.pdf" target="_blank" download="TANVI_AGGARWAL_RESUME.pdf"
+                    class="px-4 py-3 rounded-full bg-gradient-to-r from-teal-500 to-indigo-600 text-white font-bold text-xs shadow-2xl flex items-center gap-2 hover:scale-105 transition transform">
+                    <i class="fas fa-file-pdf text-base"></i> Resume PDF
+                </a>
+            </div>
+
             <footer class="border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500">
-                <p>© 2026 Tanvi Aggarwal. Built with HTML, CSS, JavaScript & Tailwind CSS.</p>
+                <p>© 2026 Tanvi Aggarwal. Built with HTML, Tailwind CSS & JavaScript.</p>
             </footer>
         </div>
 
@@ -555,22 +597,22 @@
                     charIdx++;
                 }
 
-                let speed = isDeleting ? 50 : 100;
+                let speed = isDeleting ? 40 : 80;
 
                 if (!isDeleting && charIdx === currentWord.length) {
-                    speed = 2000;
+                    speed = 2200;
                     isDeleting = true;
                 } else if (isDeleting && charIdx === 0) {
                     isDeleting = false;
                     wordIdx = (wordIdx + 1) % words.length;
-                    speed = 500;
+                    speed = 400;
                 }
 
                 setTimeout(type, speed);
             }
             type();
 
-            // Canvas Background Particles
+            // Canvas Background Floating Particles
             const canvas = document.getElementById('bg-canvas');
             const ctx = canvas.getContext('2d');
             let particles = [];
@@ -582,14 +624,16 @@
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
 
+            const colors = ['#14b8a6', '#6366f1', '#ec4899', '#f59e0b'];
+
             class Particle {
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2 + 1;
-                    this.speedX = Math.random() * 0.5 - 0.25;
-                    this.speedY = Math.random() * 0.5 - 0.25;
-                    this.color = '#14b8a6';
+                    this.size = Math.random() * 2.5 + 1;
+                    this.speedX = Math.random() * 0.6 - 0.3;
+                    this.speedY = Math.random() * 0.6 - 0.3;
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
                 }
                 update() {
                     this.x += this.speedX;
@@ -599,14 +643,14 @@
                 }
                 draw() {
                     ctx.fillStyle = this.color;
-                    ctx.globalAlpha = 0.2;
+                    ctx.globalAlpha = 0.25;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
 
-            for (let i = 0; i < 40; i++) particles.push(new Particle());
+            for (let i = 0; i < 50; i++) particles.push(new Particle());
 
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
